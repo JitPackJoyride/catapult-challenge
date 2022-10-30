@@ -1,5 +1,7 @@
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import React from 'react'
+import '@fontsource/roboto'
+import '@fontsource/inter/variable.css'
 
 interface Props {
     children: React.ReactNode
@@ -7,8 +9,8 @@ interface Props {
 
 const theme = extendTheme({
     fonts: {
-        heading: `'Bowlby One SC', sans-serif`,
-        body: `'Inter', sans-serif`,
+        heading: `'Roboto', sans-serif`,
+        body: `'InterVariable', sans-serif`,
     },
 })
 

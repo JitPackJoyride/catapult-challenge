@@ -4,7 +4,7 @@ import { Line } from 'react-chartjs-2'
 
 Chart.register(...registerables)
 
-type LineChartProps = {
+interface LineChartProps {
     xAxisData: number[]
     yAxisData: number[]
     title?: string
@@ -18,9 +18,25 @@ const LineChart = ({ xAxisData, yAxisData, title, xLabel, yLabel }: LineChartPro
             title: {
                 display: !!title,
                 text: title,
+                font: {
+                    family: "'Roboto', cursive",
+                },
             },
             legend: {
                 display: false,
+                labels: {
+                    font: {
+                        family: "'Inter', sans-serif",
+                    },
+                },
+            },
+            tooltip: {
+                titleFont: {
+                    family: "'Inter', sans-serif",
+                },
+                bodyFont: {
+                    family: "'Inter', sans-serif",
+                },
             },
         },
         scales: {
