@@ -1,6 +1,7 @@
 import React from 'react'
 import { Chart, ChartOptions, registerables } from 'chart.js'
 import { Line } from 'react-chartjs-2'
+import '@fontsource/roboto'
 
 Chart.register(...registerables)
 
@@ -19,23 +20,21 @@ const LineChart = ({ xAxisData, yAxisData, title, xLabel, yLabel }: LineChartPro
                 display: !!title,
                 text: title,
                 font: {
-                    family: "'Roboto', cursive",
+                    family: "'Roboto', sans-serif",
+                    size: 18,
                 },
             },
             legend: {
                 display: false,
-                labels: {
-                    font: {
-                        family: "'Inter', sans-serif",
-                    },
-                },
             },
             tooltip: {
                 titleFont: {
                     family: "'Inter', sans-serif",
+                    size: 16,
                 },
                 bodyFont: {
                     family: "'Inter', sans-serif",
+                    size: 16,
                 },
             },
         },

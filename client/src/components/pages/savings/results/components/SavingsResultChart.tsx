@@ -1,5 +1,5 @@
-import LineChart, { LineChartProps } from '../../../LineChart'
-import { Container } from '@chakra-ui/react'
+import LineChart, { LineChartProps } from '../../../../LineChart'
+import { Box } from '@chakra-ui/react'
 import React from 'react'
 
 interface Props {
@@ -11,7 +11,9 @@ interface Props {
 
 const SavingsResultChart = ({ savingsResult }: Props) => {
     return (
-        <Container>
+        // Note: This must be relatively positioned to allow the chart to resize responsively
+        // For more details refer to: https://www.chartjs.org/docs/latest/configuration/responsive.html#important-note
+        <Box position={'relative'} w={{ base: 'sm', sm: 'md', md: 'xl', lg: '2xl', xl: '4xl' }}>
             <LineChart
                 title="Savings Over time"
                 xAxisData={savingsResult.xAxis}
@@ -19,7 +21,7 @@ const SavingsResultChart = ({ savingsResult }: Props) => {
                 xLabel="Years"
                 yLabel="Amount"
             />
-        </Container>
+        </Box>
     )
 }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box } from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/react'
 import NavHeader from './components/NavHeader'
 
 type LayoutProps = {
@@ -7,10 +7,10 @@ type LayoutProps = {
 }
 
 const DefaultLayout = ({ children }: LayoutProps) => (
-    <Box display="flex" minHeight="100vh" height="100%" flexDirection="column">
+    <Flex minH="100vh" h="100%" direction="column" bg={'gray.200'}>
         <NavHeader />
         <>{children}</>
-    </Box>
+    </Flex>
 )
 
 export default DefaultLayout

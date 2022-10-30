@@ -1,13 +1,13 @@
 import React from 'react'
-import DefaultLayout from './components/layouts/Default'
+import DefaultLayout from './components/layouts/DefaultLayout'
 import ThemedChakraProvider from './ThemedChakraProvider'
-import Savings from './components/pages/savings/Savings'
+import SavingsPage from './components/pages/savings/SavingsPage'
 
 function App() {
     return (
         <ThemedChakraProvider>
             <DefaultLayout>
-                <Savings />
+                <SavingsPage />
             </DefaultLayout>
         </ThemedChakraProvider>
     )
