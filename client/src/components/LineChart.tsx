@@ -4,7 +4,7 @@ import { Line } from 'react-chartjs-2'
 
 Chart.register(...registerables)
 
-type Props = {
+type LineChartProps = {
     xAxisData: number[]
     yAxisData: number[]
     title?: string
@@ -12,7 +12,7 @@ type Props = {
     yLabel?: string
 }
 
-const LineChart = ({ xAxisData, yAxisData, title, xLabel, yLabel }: Props) => {
+const LineChart = ({ xAxisData, yAxisData, title, xLabel, yLabel }: LineChartProps) => {
     const options: ChartOptions<'line'> = {
         plugins: {
             title: {
@@ -52,4 +52,5 @@ const LineChart = ({ xAxisData, yAxisData, title, xLabel, yLabel }: Props) => {
     )
 }
 
+export type { LineChartProps }
 export default LineChart
