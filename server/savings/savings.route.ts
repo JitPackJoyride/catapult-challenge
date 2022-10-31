@@ -28,7 +28,7 @@ router.post(
         body('annualInterestRate')
             .exists()
             .isFloat({ min: 0, max: 100 })
-            .withMessage('Interest rate must be a number between 0 and 100'),
+            .withMessage('Annual Interest rate must be a number between 0 and 100'),
     ],
     validateRequestMiddleware,
     (req: Request<{}, {}, SavingsApiBody>, res: Response) => {
