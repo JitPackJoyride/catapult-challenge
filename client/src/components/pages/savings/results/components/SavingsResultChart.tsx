@@ -8,7 +8,7 @@ interface Props {
 }
 
 const SavingsResultChart = ({ savingsIntervalsResult }: Props) => {
-    if (savingsIntervalsResult?.xAxis.length === 0) {
+    if (savingsIntervalsResult?.xAxis.length === 0 || savingsIntervalsResult?.yAxis[0] === null) {
         return (
             <Box
                 w={{ base: 'sm', sm: 'md', md: 'xl', lg: '2xl', xl: '4xl' }}

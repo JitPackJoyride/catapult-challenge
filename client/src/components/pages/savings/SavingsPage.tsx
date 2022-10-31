@@ -18,6 +18,7 @@ import SavingsResultTotal from './results/components/SavingsResultTotal'
 import { useCalculateTotalSavingsQuery } from '../../../services/savingsApi'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../store'
+import EnoughSavingsAlert from './results/components/EnoughSavingsAlert'
 
 const SavingsPage = () => {
     const toast = useToast()
@@ -62,12 +63,13 @@ const SavingsPage = () => {
             <Heading as={'h1'} textAlign={'center'}>
                 Calculate total savings
             </Heading>
+            <EnoughSavingsAlert totalSavings={data?.totalSavings} />
             <Grid
                 justifyItems={{ base: 'center', lg: 'stretch' }}
                 alignItems={'center'}
                 templateColumns={{ base: '1fr', lg: 'auto 1fr' }}
                 templateRows={{ base: 'auto auto 1fr', lg: '1fr auto' }}
-                gap={{ base: 2, lg: 8 }}
+                gap={10}
             >
                 <GridItem colSpan={1}>
                     <SavingsInput />
@@ -83,7 +85,7 @@ const SavingsPage = () => {
                     <SavingsResultTotal totalSavings={error ? 0 : data!.totalSavings} />
                 </GridItem>
             </Grid>
-            {(error || data?.savingsAtIntervals.xAxis.length === 0) && (
+            {error && (
                 <Container>
                     <Alert status="error">
                         <AlertIcon />
