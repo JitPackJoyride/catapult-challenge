@@ -27,7 +27,7 @@ router.post(
             .withMessage('Monthly deposit must be a number and greater than or equal to 0'),
         body('annualInterestRate')
             .exists()
-            .isFloat({ min: 0, max: 100 })
+            .isFloat({ min: 0.1, max: 100 })
             .withMessage('Annual Interest rate must be a number between 0 and 100'),
     ],
     validateRequestMiddleware,

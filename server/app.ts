@@ -2,10 +2,14 @@ import express, { json } from 'express'
 import { savingsRouter } from './savings/savings.route'
 import { errorHandlerMiddleware } from './middlewares/errorHandler.middleware'
 import { NotFoundError } from './errors/notFound.error'
+import cors from 'cors'
 
 const app = express()
 
 app.set('port', process.env.PORT || 3001)
+
+// Allow CORS
+app.use(cors({ origin: 'http://localhost:3000' }))
 
 // Express will handle JSON body parsing
 app.use(json())

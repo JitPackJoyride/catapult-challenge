@@ -4,14 +4,14 @@ import SavingsPercentageInput from './SavingsPercentageInput'
 import SavingsMoneyInput from './SavingsMoneyInput'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../../../store'
-import { setInitialSavings, setInterestRate, setMonthlyDeposit } from '../../savingsSlice'
+import { setAnnualInterestRate, setInitialSavings, setMonthlyDeposit } from '../../savingsSlice'
 
 interface Props {
-    label: 'Initial Savings' | 'Monthly Deposit' | 'Interest Rate'
+    label: 'Initial Savings' | 'Monthly Deposit' | 'Annual Interest Rate'
 }
 
 const SavingsInputType = ({ label }: Props) => {
-    const { initialSavings, monthlyDeposit, interestRate } = useSelector(
+    const { initialSavings, monthlyDeposit, annualInterestRate } = useSelector(
         (state: RootState) => state.savings
     )
 
@@ -31,12 +31,12 @@ const SavingsInputType = ({ label }: Props) => {
                     step={100}
                 />
             )
-        case 'Interest Rate':
+        case 'Annual Interest Rate':
             return (
                 <SavingsPercentageInput
-                    reduxAction={setInterestRate}
-                    defaultValue={interestRate.toFixed(1)}
-                    min={0}
+                    reduxAction={setAnnualInterestRate}
+                    defaultValue={annualInterestRate.toFixed(1)}
+                    min={0.1}
                     max={100}
                 />
             )

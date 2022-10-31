@@ -14,7 +14,7 @@ const SavingsInput = ({ ...stackProps }: StackProps) => {
         >
             <SavingsInputItem label={'Initial Savings'} />
             <SavingsInputItem label={'Monthly Deposit'} />
-            <SavingsInputItem label={'Interest Rate'} />
+            <SavingsInputItem label={'Annual Interest Rate'} />
         </VStack>
     )
 }

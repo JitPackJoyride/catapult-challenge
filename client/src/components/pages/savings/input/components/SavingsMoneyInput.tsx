@@ -16,7 +16,7 @@ interface Props {
     precision?: number
 }
 
-const SavingsMoneyInput = ({ reduxAction, defaultValue }: Props) => {
+const SavingsMoneyInput = ({ reduxAction, defaultValue, step = 1000 }: Props) => {
     const formatAsCurrency = (val: string): string => `£${val}`
     const parseFromCurrency = (val: string): string => {
         // Handle edge case where user deletes all characters
@@ -32,8 +32,9 @@ const SavingsMoneyInput = ({ reduxAction, defaultValue }: Props) => {
             size={'sm'}
             bg={'white'}
             defaultValue={defaultValue}
+            min={0}
             precision={2}
-            step={1000}
+            step={step}
             allowMouseWheel
             onChange={(valueString) => {
                 dispatch(reduxAction(parseFromCurrency(valueString)))

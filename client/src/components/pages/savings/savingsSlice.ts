@@ -5,13 +5,13 @@ import { roundToNumberOfDecimalPlaces } from '../../../utils'
 export interface SavingsState {
     initialSavings: number
     monthlyDeposit: number
-    interestRate: number
+    annualInterestRate: number
 }
 
 const initialState: SavingsState = {
     initialSavings: 1000.0,
     monthlyDeposit: 100.0,
-    interestRate: 5.0,
+    annualInterestRate: 5.0,
 }
 
 export const savingsSlice = createSlice({
@@ -36,18 +36,18 @@ export const savingsSlice = createSlice({
             // Always round to 2 decimal places to remain consistent with the number input field
             state.monthlyDeposit = roundToNumberOfDecimalPlaces(action.payload, 2)
         },
-        setInterestRate: (state, action: PayloadAction<string>) => {
+        setAnnualInterestRate: (state, action: PayloadAction<string>) => {
             // Handle edge case where user deletes all characters
             if (action.payload === '') {
-                state.interestRate = 0.0
+                state.annualInterestRate = 0.0
                 return
             }
             // Always round to 1 decimal place to remain consistent with the number input field
-            state.interestRate = roundToNumberOfDecimalPlaces(action.payload, 1)
+            state.annualInterestRate = roundToNumberOfDecimalPlaces(action.payload, 1)
         },
     },
 })
 
-export const { setInitialSavings, setMonthlyDeposit, setInterestRate } = savingsSlice.actions
+export const { setInitialSavings, setMonthlyDeposit, setAnnualInterestRate } = savingsSlice.actions
 
 export default savingsSlice.reducer

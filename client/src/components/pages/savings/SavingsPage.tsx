@@ -1,17 +1,62 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import SavingsInput from './input/SavingsInput'
-import { Grid, GridItem, Heading, VStack } from '@chakra-ui/react'
+import {
+    Alert,
+    AlertDescription,
+    AlertIcon,
+    Center,
+    CircularProgress,
+    Container,
+    Grid,
+    GridItem,
+    Heading,
+    useToast,
+    VStack,
+} from '@chakra-ui/react'
 import SavingsResultChart from './results/components/SavingsResultChart'
 import SavingsResultTotal from './results/components/SavingsResultTotal'
-
-// Note: This is just for example purposes
-// should be replaced with real data from the server
-const tempData = {
-    xAxis: [0, 10, 20, 30, 40, 50],
-    yAxis: [100, 150, 180, 210, 240, 350],
-}
+import { useCalculateTotalSavingsQuery } from '../../../services/savingsApi'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../../store'
 
 const SavingsPage = () => {
+    const toast = useToast()
+
+    const { initialSavings, monthlyDeposit, annualInterestRate } = useSelector(
+        (state: RootState) => state.savings
+    )
+    // Using a query hook automatically fetches data and returns query values
+    const { data, error, isLoading } = useCalculateTotalSavingsQuery({
+        initialSavings,
+        monthlyDeposit,
+        annualInterestRate,
+    })
+
+    useEffect(() => {
+        if (error) {
+            // @ts-ignore
+            for (const apiError of error.data.errors) {
+                let id = apiError.field
+                if (!toast.isActive(id)) {
+                    toast({
+                        id,
+                        title: apiError.message,
+                        status: 'error',
+                        duration: 2000,
+                        isClosable: true,
+                    })
+                }
+            }
+        }
+    }, [error])
+
+    if (isLoading)
+        return (
+            <Center flex={1}>
+                <CircularProgress isIndeterminate color="blue.300" />
+            </Center>
+        )
+
     return (
         <VStack spacing={10} w={'full'} maxW={'8xl'} mx={'auto'} px={4} py={10}>
             <Heading as={'h1'} textAlign={'center'}>
@@ -28,12 +73,24 @@ const SavingsPage = () => {
                     <SavingsInput />
                 </GridItem>
                 <GridItem rowSpan={{ base: 1, lg: 2 }} colSpan={1}>
-                    <SavingsResultChart savingsResult={tempData} />
+                    <SavingsResultChart
+                        savingsIntervalsResult={
+                            error ? { xAxis: [], yAxis: [] } : data!.savingsAtIntervals
+                        }
+                    />
                 </GridItem>
                 <GridItem>
-                    <SavingsResultTotal />
+                    <SavingsResultTotal totalSavings={error ? 0 : data!.totalSavings} />
                 </GridItem>
             </Grid>
+            {(error || data?.savingsAtIntervals.xAxis.length === 0) && (
+                <Container>
+                    <Alert status="error">
+                        <AlertIcon />
+                        <AlertDescription>Fix your data to view the results</AlertDescription>
+                    </Alert>
+                </Container>
+            )}
         </VStack>
     )
 }
