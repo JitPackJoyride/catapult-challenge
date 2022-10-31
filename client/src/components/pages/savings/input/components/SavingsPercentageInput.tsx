@@ -6,18 +6,26 @@ import {
     NumberInputStepper,
 } from '@chakra-ui/react'
 import React from 'react'
+import { ActionCreatorWithPayload } from '@reduxjs/toolkit'
+import { useAppDispatch } from '../../../../../store'
 
 interface Props {
+    reduxAction: ActionCreatorWithPayload<string, string>
     defaultValue: string
     min: number
     max: number
 }
 
-const SavingsPercentageInput = ({ defaultValue, min, max }: Props) => {
-    const format = (val: string) => `${val}%`
-    const parse = (val: string) => val.replace(/%$/, '')
+const SavingsPercentageInput = ({ reduxAction, defaultValue, min, max }: Props) => {
+    const formatAsPercent = (val: string) => `${val}%`
+    const parseAsPercent = (val: string) => {
+        // Handle edge case where user deletes all characters
+        if (val === '') return '0.0'
+        return val.replace(/%/, '')
+    }
 
     const [value, setValue] = React.useState(`${defaultValue}`)
+    const dispatch = useAppDispatch()
 
     return (
         <NumberInput
@@ -29,8 +37,11 @@ const SavingsPercentageInput = ({ defaultValue, min, max }: Props) => {
             precision={1}
             step={0.1}
             allowMouseWheel
-            onChange={(valueString) => setValue(parse(valueString))}
-            value={format(value)}
+            onChange={(valueString) => {
+                dispatch(reduxAction(parseAsPercent(valueString)))
+                setValue(parseAsPercent(valueString))
+            }}
+            value={formatAsPercent(value)}
         >
             <NumberInputField />
             <NumberInputStepper>

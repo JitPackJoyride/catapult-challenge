@@ -9,6 +9,7 @@
     "@fontsource/bowlby-one-sc": "^4.5.9",
     "@fontsource/inter": "^4.5.14",
     "@fontsource/roboto": "^4.5.8",
+    "@reduxjs/toolkit": "^1.8.6",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
@@ -21,6 +22,7 @@
     "react": "^17.0.2",
     "react-chartjs-2": "^4.0.0",
     "react-dom": "^17.0.2",
+    "react-redux": "^8.0.4",
     "react-scripts": "5.0.0",
     "typescript": "4.5.4",
     "web-vitals": "^2.1.3"
